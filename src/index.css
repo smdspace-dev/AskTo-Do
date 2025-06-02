@@ -1,0 +1,466 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Futuristic CSS Variables */
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Futuristic Color Palette */
+  --primary-cyber: #00D4FF;
+  --primary-neon: #00FF88;
+  --primary-purple: #8B5CF6;
+  --primary-pink: #FF006E;
+  --dark-bg: #0A0A0A;
+  --dark-surface: #1A1A1A;
+  --dark-elevated: #2A2A2A;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --neon-glow: 0 0 20px;
+  --cyber-glow: 0 0 30px;
+  
+  color-scheme: dark;
+  color: #E0E0E0;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A2E 50%, #16213E 100%);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--dark-bg);
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Grid Animation */
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(10px, 10px); }
+}
+
+/* Futuristic Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-surface);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-cyber), var(--primary-neon));
+  border-radius: 4px;
+  box-shadow: var(--neon-glow) var(--primary-cyber);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--primary-neon), var(--primary-cyber));
+}
+
+/* Futuristic Components */
+@layer components {
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cyber-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-cyber), var(--primary-neon));
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: var(--dark-bg);
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--neon-glow) var(--primary-cyber);
+  }
+  
+  .cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .cyber-button:hover::before {
+    left: 100%;
+  }
+  
+  .cyber-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--cyber-glow) var(--primary-neon);
+  }
+  
+  .voice-interface {
+    position: relative;
+    background: var(--dark-surface);
+    border: 2px solid var(--primary-cyber);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 
+      var(--cyber-glow) var(--primary-cyber),
+      inset 0 0 20px rgba(0, 212, 255, 0.1);
+    animation: voicePulse 2s ease-in-out infinite;
+  }
+  
+  .voice-interface.listening {
+    border-color: var(--primary-neon);
+    box-shadow: 
+      var(--cyber-glow) var(--primary-neon),
+      inset 0 0 20px rgba(0, 255, 136, 0.2);
+    animation: listeningPulse 1s ease-in-out infinite;
+  }
+  
+  .voice-interface.speaking {
+    border-color: var(--primary-pink);
+    box-shadow: 
+      var(--cyber-glow) var(--primary-pink),
+      inset 0 0 20px rgba(255, 0, 110, 0.2);
+    animation: speakingWave 0.8s ease-in-out infinite;
+  }
+  
+  .task-card-futuristic {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .task-card-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary-cyber), var(--primary-neon));
+    transition: width 0.3s ease;
+  }
+  
+  .task-card-futuristic:hover {
+    transform: translateX(8px) translateY(-4px);
+    box-shadow: 
+      -8px 8px 24px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(0, 212, 255, 0.2);
+  }
+  
+  .task-card-futuristic:hover::before {
+    width: 8px;
+  }
+  
+  .conversation-bubble-ai {
+    background: linear-gradient(135deg, var(--dark-elevated), var(--dark-surface));
+    border: 1px solid var(--primary-cyber);
+    border-radius: 18px 18px 18px 4px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.2);
+    animation: slideInLeft 0.4s ease-out;
+  }
+  
+  .conversation-bubble-user {
+    background: linear-gradient(135deg, var(--primary-cyber), var(--primary-neon));
+    color: var(--dark-bg);
+    border-radius: 18px 18px 4px 18px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    max-width: 80%;
+    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+    animation: slideInRight 0.4s ease-out;
+  }
+  
+  .sidebar-futuristic {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--glass-border);
+    position: relative;
+  }
+  
+  .sidebar-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary-cyber), transparent, var(--primary-neon));
+    animation: borderFlow 3s ease-in-out infinite;
+  }
+  
+  .nav-item-futuristic {
+    position: relative;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .nav-item-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .nav-item-futuristic:hover::before {
+    left: 100%;
+  }
+  
+  .nav-item-futuristic:hover {
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateX(4px);
+  }
+  
+  .nav-item-futuristic.active {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 136, 0.2));
+    border-left: 3px solid var(--primary-cyber);
+  }
+  
+  .floating-voice-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-cyber), var(--primary-neon));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      var(--neon-glow) var(--primary-cyber),
+      0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  .floating-voice-button:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 
+      var(--cyber-glow) var(--primary-neon),
+      0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+  
+  .floating-voice-button.listening {
+    animation: voicePulse 1s ease-in-out infinite;
+    background: linear-gradient(135deg, var(--primary-neon), var(--primary-cyber));
+  }
+  
+  .floating-voice-button.speaking {
+    animation: speakingWave 0.6s ease-in-out infinite;
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+  }
+  
+  .waveform-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 40px;
+  }
+  
+  .waveform-bar {
+    width: 4px;
+    background: linear-gradient(180deg, var(--primary-cyber), var(--primary-neon));
+    border-radius: 2px;
+    animation: waveform 1.2s ease-in-out infinite;
+  }
+  
+  .typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1rem;
+  }
+  
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-cyber);
+    border-radius: 50%;
+    animation: typingBounce 1.4s ease-in-out infinite;
+  }
+  
+  .hologram-text {
+    background: linear-gradient(135deg, var(--primary-cyber), var(--primary-neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  }
+  
+  .neural-network-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-image: 
+      radial-gradient(circle at 20% 20%, var(--primary-cyber) 1px, transparent 1px),
+      radial-gradient(circle at 80% 80%, var(--primary-neon) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: neuralPulse 4s ease-in-out infinite;
+  }
+}
+
+/* Futuristic Animations */
+@keyframes voicePulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px var(--primary-cyber),
+      0 0 40px var(--primary-cyber),
+      inset 0 0 20px rgba(0, 212, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px var(--primary-cyber),
+      0 0 60px var(--primary-cyber),
+      inset 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+}
+
+@keyframes listeningPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 20px var(--primary-neon),
+      0 0 40px var(--primary-neon);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 
+      0 0 30px var(--primary-neon),
+      0 0 60px var(--primary-neon);
+  }
+}
+
+@keyframes speakingWave {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  75% {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes waveform {
+  0%, 100% {
+    height: 8px;
+  }
+  25% {
+    height: 24px;
+  }
+  50% {
+    height: 16px;
+  }
+  75% {
+    height: 32px;
+  }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+.waveform-bar:nth-child(1) { animation-delay: 0s; }
+.waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+.waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+.waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+.waveform-bar:nth-child(5) { animation-delay: 0.4s; }
