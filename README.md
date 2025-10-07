@@ -363,8 +363,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: support@aitodo.app
-- 💬 Issues: [GitHub Issues](https://github.com/smdspace-dev/AskTo-Do.git/issues)
+- 📧 Email: ahilxdesigns@gmail.com
+- 💬 Issues: [GitHub Issues](https://github.com/smdspace-dev/AskTo-Do/issues)
 
 ---
 
